@@ -1,0 +1,1 @@
+export { CommonAdapter } from "./adapter";
