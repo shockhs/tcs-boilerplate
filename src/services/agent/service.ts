@@ -1,16 +1,40 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
-import { isEqual } from "lodash";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { isEqual } from 'lodash';
 
-import { API_ROOT } from "@/constants/api";
-import { agent } from "@/types/services";
-import { guards } from "@/types/guards";
-import { CommonAdapter, IAdapter, AdapterType } from "@/adapters";
+import { API_ROOT } from '@/constants/api';
+import { agent } from '@/types/services';
+import { guards } from '@/types/guards';
+import { CommonAdapter, IAdapter, AdapterType } from '@/adapters';
+import { AnyFunction } from '@/types/utils';
 
 class AgentService implements agent.IAgentService {
   private templateModalProps: agent.ModalProps | null = null;
+
   private axiosInstance: AxiosInstance | null = null;
+
   private controllers: agent.AbortRequestData[] = [];
+
   private adapter: IAdapter = new CommonAdapter();
+
+  private agentInitializationPromiseResolve: null | AnyFunction = null;
+
+  private agentInitializationPromise = new Promise((resolve: AnyFunction) => {
+    this.agentInitializationPromiseResolve = resolve;
+  });
+
+  initAgent = (
+    adapterType: AdapterType,
+    templateModalProps: agent.ModalProps
+  ) => {
+    this.templateModalProps = templateModalProps;
+    this.axiosInstance = axios.create({
+      headers: {},
+      baseURL: API_ROOT,
+    });
+
+    this.initAdapter(adapterType);
+    this.agentInitializationPromiseResolve?.();
+  };
 
   initAdapter = (adapterType: AdapterType) => {
     switch (adapterType) {
@@ -27,7 +51,7 @@ class AgentService implements agent.IAgentService {
 
   handleError(error: AxiosError) {
     let errorMessage =
-      error.response?.data?.message || error.message || "Ошибка";
+      error.response?.data?.message || error.message || 'Ошибка';
 
     if (guards.isString(error.response?.data)) {
       errorMessage = error.response?.data;
@@ -45,19 +69,6 @@ class AgentService implements agent.IAgentService {
     };
   }
 
-  initAgent = (
-    adapterType: AdapterType,
-    templateModalProps: agent.ModalProps
-  ) => {
-    this.axiosInstance = axios.create({
-      headers: {},
-      baseURL: API_ROOT,
-    });
-
-    this.initAdapter(adapterType);
-    this.templateModalProps = templateModalProps;
-  };
-
   requests = {
     abort: (controllerData: agent.ControllerData) => {
       const sentRequestIndex = this.controllers.findIndex((el) =>
@@ -73,21 +84,22 @@ class AgentService implements agent.IAgentService {
       path: string,
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
-      if (!this.axiosInstance) return;
+      return Promise.all([this.agentInitializationPromise]).then(() => {
+        const controller = new AbortController();
 
-      const controller = new AbortController();
-      this.controllers.push({
-        controller,
-        data: {
-          method: agent.RequestMethods.GET,
-          path,
-          options,
-        },
-      });
+        this.controllers.push({
+          controller,
+          data: {
+            method: agent.RequestMethods.GET,
+            path,
+            options,
+          },
+        });
 
-      return this.axiosInstance.get(path, {
-        ...options,
-        signal: controller.signal,
+        return this.axiosInstance.get(path, {
+          ...options,
+          signal: controller.signal,
+        });
       });
     },
     post: async (
@@ -95,22 +107,23 @@ class AgentService implements agent.IAgentService {
       body: any,
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
-      if (!this.axiosInstance) return;
+      return Promise.all([this.agentInitializationPromise]).then(() => {
+        const controller = new AbortController();
 
-      const controller = new AbortController();
-      this.controllers.push({
-        controller,
-        data: {
-          method: agent.RequestMethods.POST,
-          path,
-          body,
-          options,
-        },
-      });
+        this.controllers.push({
+          controller,
+          data: {
+            method: agent.RequestMethods.POST,
+            path,
+            body,
+            options,
+          },
+        });
 
-      return this.axiosInstance.post(path, body, {
-        ...options,
-        signal: controller.signal,
+        return this.axiosInstance.post(path, body, {
+          ...options,
+          signal: controller.signal,
+        });
       });
     },
     put: async (
@@ -118,43 +131,45 @@ class AgentService implements agent.IAgentService {
       body: any,
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
-      if (!this.axiosInstance) return;
+      return Promise.all([this.agentInitializationPromise]).then(() => {
+        const controller = new AbortController();
 
-      const controller = new AbortController();
-      this.controllers.push({
-        controller,
-        data: {
-          method: agent.RequestMethods.PUT,
-          path,
-          body,
-          options,
-        },
-      });
+        this.controllers.push({
+          controller,
+          data: {
+            method: agent.RequestMethods.PUT,
+            path,
+            body,
+            options,
+          },
+        });
 
-      return this.axiosInstance.put(path, body, {
-        ...options,
-        signal: controller.signal,
+        return this.axiosInstance.put(path, body, {
+          ...options,
+          signal: controller.signal,
+        });
       });
     },
     delete: async (
       path: string,
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
-      if (!this.axiosInstance) return;
+      return Promise.all([this.agentInitializationPromise]).then(() => {
+        const controller = new AbortController();
 
-      const controller = new AbortController();
-      this.controllers.push({
-        controller,
-        data: {
-          method: agent.RequestMethods.DELETE,
-          path,
-          options,
-        },
-      });
+        this.controllers.push({
+          controller,
+          data: {
+            method: agent.RequestMethods.DELETE,
+            path,
+            options,
+          },
+        });
 
-      return this.axiosInstance.delete(path, {
-        ...options,
-        signal: controller.signal,
+        return this.axiosInstance.delete(path, {
+          ...options,
+          signal: controller.signal,
+        });
       });
     },
   };
