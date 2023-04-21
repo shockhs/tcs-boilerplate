@@ -1,3 +1,5 @@
+import { guards } from "@/types/guards";
+
 /* eslint-disable no-multi-str */
 (() => {
   let worker,
@@ -5,7 +7,7 @@
     lastFakeId = 0,
     maxFakeId = 0x7fffffff; // 2 ^ 31 - 1, 31 bit, positive values of signed 32 bit integer
 
-  if (typeof Worker !== "undefined") {
+  if (!guards.isUndefined(Worker)) {
     function getFakeId() {
       do {
         if (lastFakeId === maxFakeId) {
@@ -86,7 +88,7 @@
             delete fakeIdToCallback[fakeId];
           }
         }
-        if (typeof callback === "string") {
+        if (guards.isString(callback)) {
           try {
             // eslint-disable-next-line no-eval
             callback = eval(callback);
@@ -94,7 +96,7 @@
             console.log(`Error parsing callback code string: `, error);
           }
         }
-        if (typeof callback === "function") {
+        if (guards.isFunction(callback)) {
           callback.apply(window, parameters);
         }
       };

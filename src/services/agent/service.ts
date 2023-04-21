@@ -3,6 +3,7 @@ import { isEqual } from "lodash";
 
 import { API_ROOT } from "@/constants/api";
 import { agent } from "@/types/services";
+import { guards } from "@/types/guards";
 import { CommonAdapter, IAdapter, AdapterType } from "@/adapters";
 
 class AgentService implements agent.IAgentService {
@@ -28,7 +29,7 @@ class AgentService implements agent.IAgentService {
     let errorMessage =
       error.response?.data?.message || error.message || "Ошибка";
 
-    if (typeof error.response?.data === "string") {
+    if (guards.isString(error.response?.data)) {
       errorMessage = error.response?.data;
     }
 
@@ -164,7 +165,7 @@ class AgentService implements agent.IAgentService {
   //       params: agent.AppCheckAccessParams
   //     ): Promise<agent.AppCheckAccessPromise> => {
   //       if (!this.axiosInstance)
-  //         return { success: false, error: 'Агент не был инициализирован' };
+  //         return { success: false, error: "Агент не был инициализирован" };
 
   //       try {
   //         const { success }: agent.AppCheckAccessResponseData =

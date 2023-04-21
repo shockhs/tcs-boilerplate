@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useMemo } from "react";
 
 import { IS_DEVELOPMENT } from "@/constants/application";
 import { AnyFunction, Optional } from "@/types/utils";
+import { guards } from "@/types/guards";
 
 const isPrimitive = (value: any) => {
   return !value || /^[sbn]/.test(typeof value);
@@ -20,7 +21,7 @@ const checkDeps = (deps: any[], depsAreEqual: AnyFunction, name: string) => {
       `${name} should not be used with dependencies that are all primitive values. Use ${reactHookName} instead.`
     );
   }
-  if (typeof depsAreEqual !== "function") {
+  if (!guards.isFunction(depsAreEqual)) {
     console.warn(
       `${name} should be used with depsEqual callback for comparing deps list`
     );

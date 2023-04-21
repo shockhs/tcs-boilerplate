@@ -1,3 +1,5 @@
+import { guards } from "@/types/guards";
+
 import { IStorageService } from "./types";
 
 class StorageService implements IStorageService {
@@ -13,7 +15,7 @@ class StorageService implements IStorageService {
   }
 
   setItem = (key: string, value: string): void => {
-    if (this.isLocalStorageUsed && typeof value === "object") {
+    if (this.isLocalStorageUsed && guards.isObject(value)) {
       value = JSON.stringify(value);
       this.storage.setItem(`${key}IsObject`, `${true}`);
     }

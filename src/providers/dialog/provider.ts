@@ -1,5 +1,6 @@
 import { guards } from "@/types/guards";
 import { dialog } from "@/types/providers";
+import { HttpStatusCode } from "@/types/api";
 
 import { ERROR_DICTIONARY } from "./constants";
 
@@ -32,7 +33,7 @@ export class DialogProvider {
   showError = (error?: dialog.ErrorResponse | string): void => {
     const type = dialog.DialogType.error;
 
-    if (typeof error === "string") {
+    if (guards.isString(error)) {
       this.show({ title: "Ошибка", type, content: error });
       return;
     }
@@ -46,7 +47,7 @@ export class DialogProvider {
       return;
     }
 
-    const { status = 500, data } = error;
+    const { status = HttpStatusCode.errorInternal, data } = error;
     const title = ERROR_DICTIONARY[status] || "Ошибка";
 
     const content = guards.isNotNull(data) ? data.message : null;
