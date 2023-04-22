@@ -1,6 +1,6 @@
 import { FC, memo, useMemo } from "react";
 
-import { SContainer, SOverlay } from "./styled-components";
+import { SContainer, SOverlay } from "./style";
 import { IProps } from "./types";
 
 const DialogDefault: FC<IProps> = (props) => {

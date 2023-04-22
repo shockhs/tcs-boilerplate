@@ -1,5 +1,6 @@
-import { FC, memo, useCallback, useEffect } from "react";
-import { Routes } from "react-router-dom";
+import { FC, memo, useCallback, useEffect, useMemo } from "react";
+import { Route, Routes } from "react-router-dom";
+import { observer } from "mobx-react";
 
 import { Modal } from "@/components/Modal";
 import { usePortal } from "@/hooks/usePortal";
@@ -10,9 +11,17 @@ import {
   SOuterContainer,
   SInnerContainer,
   SScrollableContainer,
-} from "./styled-components";
+} from "./style";
+import { HeaderComponent } from "@/components/Header";
+import { navigation } from "@/types/providers";
+import CategoriesPage from "./categories/page";
+import { LocalDatabaseStore } from "@/stores/local-database";
 
-const RouterPage: FC = () => {
+const RouterPage: FC = observer(() => {
+  const localStore = useMemo(() => {
+    return new LocalDatabaseStore();
+  }, []);
+
   const { isOpen, closePortal, openPortal, setPortalData, portalData } =
     usePortal();
 
@@ -34,14 +43,20 @@ const RouterPage: FC = () => {
     <>
       {isOpen && <Modal>{portalData}</Modal>}
       <SOuterContainer>
+        <HeaderComponent />
         <SScrollableContainer>
           <SInnerContainer>
-            <Routes>{null}</Routes>
+            <Routes>
+              <Route
+                path={navigation.NavigationRoutes.categories}
+                element={<CategoriesPage localStore={localStore} />}
+              />
+            </Routes>
           </SInnerContainer>
         </SScrollableContainer>
       </SOuterContainer>
     </>
   );
-};
+});
 
 export const Router = memo(RouterPage);

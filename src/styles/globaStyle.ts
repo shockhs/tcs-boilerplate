@@ -3,18 +3,44 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
     :root {
         --app-height: 100vh;
+        --primary-rest--color: #ffdd2d;
+        --primary-hover--color: #fcc521;
+        --link-rest--color: #336fee;
+        --link-hover--color: #1f50ba;
+        --app-font--color: rgba(0,0,0,.8);
+        --color-secondary: #ECF1F7;
+        --color-secondary-hover: #E4EBF3;
+        --color-secondary-active: #DDE4ED;
+        --color-black: #000000;
+        --color-error: #f52222;
+        --color-error-button: #a00707;
     }
     
     html,
     body {
         margin: 0;
         padding: 0;
+        font-family: 'Open Sans', sans-serif;
     }
     
+    button {
+        cursor: pointer;
+    }
+
     &,
     &::before,
     &::after {
         box-sizing: border-box;
+    }
+
+    a {
+        text-decoration:none;
+        color: var(--link-rest--color);
+        transition: color 0.05s linear;
+
+        &:hover {
+            color: var(--link-hover--color);
+        }
     }
     
     input,
