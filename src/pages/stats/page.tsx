@@ -8,6 +8,7 @@ import { FiltersState, IProps } from "./types";
 import { getFilteredCosts } from "./utils";
 import { ICostDto } from "@/types/business";
 import { CostElement } from "@/shared/cost-element";
+import { StatsBar } from "@/shared/stats";
 
 const StatsPage: FC<IProps> = observer((props) => {
   const { localStore } = props;
@@ -54,6 +55,7 @@ const StatsPage: FC<IProps> = observer((props) => {
         handleApply={handleApply}
         handleReset={handleReset}
       />
+      <StatsBar categories={categories} costs={visibleCosts} />
       <SCosts>
         <thead>
           <SHeader>

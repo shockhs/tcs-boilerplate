@@ -1,5 +1,5 @@
 import { FC, memo, useCallback, useEffect, useMemo } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { observer } from "mobx-react";
 
 import { Modal } from "@/components/Modal";
@@ -62,6 +62,12 @@ const RouterPage: FC = observer(() => {
               <Route
                 path={navigation.NavigationRoutes.stats}
                 element={<StatsPage localStore={localStore} />}
+              />
+              <Route
+                path="*"
+                element={
+                  <Navigate to={navigation.NavigationRoutes.stats} replace />
+                }
               />
             </Routes>
           </SInnerContainer>

@@ -23,6 +23,6 @@ export const SButton = styled.button`
   font-weight: 400;
   font-size: 1rem;
   background: var(--primary-rest--color);
-  color: var(--app-font--color);
+  color: var(--color-main);
   height: 2rem;
 `;

@@ -2,12 +2,11 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     :root {
-        --app-height: 100vh;
         --primary-rest--color: #ffdd2d;
         --primary-hover--color: #fcc521;
         --link-rest--color: #336fee;
         --link-hover--color: #1f50ba;
-        --app-font--color: rgba(0,0,0,.8);
+        --color-main: rgba(0,0,0,.8);
         --color-secondary: #ECF1F7;
         --color-secondary-hover: #E4EBF3;
         --color-secondary-active: #DDE4ED;

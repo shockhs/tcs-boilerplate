@@ -26,5 +26,5 @@ export const SNavigation = styled.nav`
 export const SNavLink = styled(NavLink)`
   font-weight: 600;
   font-size: 1.25rem;
-  color: var(--app-font--color);
+  color: var(--color-main);
 `;

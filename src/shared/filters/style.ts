@@ -34,5 +34,5 @@ export const SButton = styled.button<{ $primary?: Optional<boolean> }>`
   font-size: 1rem;
   background: ${({ $primary }) =>
     $primary ? "var(--primary-rest--color)" : "transparent"};
-  color: var(--app-font--color);
+  color: var(--color-main);
 `;
