@@ -85,6 +85,8 @@ class AgentService implements agent.IAgentService {
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
       return Promise.all([this.agentInitializationPromise]).then(() => {
+        if (!this.axiosInstance) return;
+
         const controller = new AbortController();
 
         this.controllers.push({
@@ -108,6 +110,8 @@ class AgentService implements agent.IAgentService {
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
       return Promise.all([this.agentInitializationPromise]).then(() => {
+        if (!this.axiosInstance) return;
+
         const controller = new AbortController();
 
         this.controllers.push({
@@ -132,6 +136,8 @@ class AgentService implements agent.IAgentService {
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
       return Promise.all([this.agentInitializationPromise]).then(() => {
+        if (!this.axiosInstance) return;
+
         const controller = new AbortController();
 
         this.controllers.push({
@@ -155,6 +161,8 @@ class AgentService implements agent.IAgentService {
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
       return Promise.all([this.agentInitializationPromise]).then(() => {
+        if (!this.axiosInstance) return;
+
         const controller = new AbortController();
 
         this.controllers.push({
