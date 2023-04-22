@@ -19,8 +19,12 @@ const CategoryElementImpl: FC<IProps> = (props) => {
 
   return (
     <SCategoryElement>
-      <STitle>{displayName}</STitle>
-      <SButton onClick={onDeleteClick}>Удалить</SButton>
+      <td>
+        <STitle>{displayName}</STitle>
+      </td>
+      <td>
+        <SButton onClick={onDeleteClick}>Удалить</SButton>
+      </td>
     </SCategoryElement>
   );
 };

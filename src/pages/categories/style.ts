@@ -11,7 +11,7 @@ export const SContainer = styled.div`
   }
 `;
 
-export const SCategories = styled.ul`
+export const SCategories = styled.table`
   display: flex;
   flex-direction: column;
 
@@ -19,3 +19,15 @@ export const SCategories = styled.ul`
     margin-top: 0.5rem;
   }
 `;
+
+export const SHeader = styled.thead`
+  display: grid;
+  align-items: center;
+  text-align: left;
+  width: 400px;
+  grid-template-columns: auto min-content;
+  height: 3rem;
+  border-bottom: 2px solid var(--color-secondary);
+`;
+
+export const STableTitle = styled.span``;

@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { AddCategoryForm } from "@/shared/add-category";
 import { CategoryElement } from "@/shared/category-element";
 
-import { SCategories, SContainer } from "./style";
+import { SCategories, SContainer, SHeader, STableTitle } from "./style";
 import { IProps } from "./types";
 
 const CategoriesPage: FC<IProps> = observer((props) => {
@@ -28,13 +28,20 @@ const CategoriesPage: FC<IProps> = observer((props) => {
     <SContainer>
       <AddCategoryForm addCategory={addCategory} />
       <SCategories>
+        <SHeader>
+          <th>
+            <STableTitle>Отображаемое имя</STableTitle>
+          </th>
+          <th>
+            <STableTitle>Действия</STableTitle>
+          </th>
+        </SHeader>
         {[...localStore.categories].map((category) => (
-          <li key={category.id}>
-            <CategoryElement
-              category={category}
-              deleteCategory={deleteCategory}
-            />
-          </li>
+          <CategoryElement
+            key={category.id}
+            category={category}
+            deleteCategory={deleteCategory}
+          />
         ))}
       </SCategories>
     </SContainer>

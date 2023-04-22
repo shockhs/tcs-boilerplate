@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
-export const SCostElement = styled.div`
+export const SCostElement = styled.tr`
   display: grid;
-  width: 400px;
-  grid-template-columns: auto min-content;
   border-bottom: 1px solid var(--color-secondary);
+  width: 100%;
+  grid-template-columns: repeat(3, 200px) min-content;
+  align-items: center;
 
-  & > * + * {
-    margin-left: 1rem;
+  & td {
+    display: flex;
+    align-items: center;
   }
 `;
 

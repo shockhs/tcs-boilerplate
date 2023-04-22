@@ -20,15 +20,12 @@ import { Nullable } from "@/types/utils";
 import { useValidation } from "@/hooks";
 import { DataType } from "@/types/hooks/useValidation";
 import { ICreateCostDto } from "@/types/business";
+import { DEFAULT_DATA } from "./constants";
 
 const CreateCostFormImpl: FC<IProps> = (props) => {
   const { createCost, categories } = props;
 
-  const [dto, setDto] = useState<ICreateCostDto>({
-    categoryId: null,
-    costValue: 0,
-    displayName: "",
-  });
+  const [dto, setDto] = useState<ICreateCostDto>(DEFAULT_DATA);
 
   const { errorFields, isValid } = useValidation({
     elements: [
@@ -94,7 +91,7 @@ const CreateCostFormImpl: FC<IProps> = (props) => {
         return;
       }
 
-      createCost(dto)
+      createCost(dto);
     },
     [createCost, dto, isValid]
   );

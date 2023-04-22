@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
-export const SCategoryElement = styled.div`
+export const SCategoryElement = styled.tr`
   display: grid;
   width: 400px;
   grid-template-columns: auto min-content;
   border-bottom: 1px solid var(--color-secondary);
+  height: 2rem;
+  align-items: center;
 
-  & > * + * {
-    margin-left: 1rem;
+  & td {
+    display: flex;
+    align-items: center;
   }
 `;
 

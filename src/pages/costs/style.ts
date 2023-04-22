@@ -11,7 +11,7 @@ export const SContainer = styled.div`
   }
 `;
 
-export const SCosts = styled.ul`
+export const SCosts = styled.table`
   display: flex;
   flex-direction: column;
 
@@ -19,3 +19,15 @@ export const SCosts = styled.ul`
     margin-top: 0.5rem;
   }
 `;
+
+export const SHeader = styled.thead`
+  display: grid;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  grid-template-columns: repeat(3, 200px) min-content;
+  height: 3rem;
+  border-bottom: 2px solid var(--color-secondary);
+`;
+
+export const STableTitle = styled.span``;
