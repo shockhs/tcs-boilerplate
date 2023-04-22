@@ -1,5 +1,5 @@
 export enum NavigationRoutes {
   categories = "/categories",
-  chart = "/chart",
+  stats = "/stats",
   costs = "/costs",
 }

@@ -27,9 +27,9 @@ const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
 
-    &,
-    &::before,
-    &::after {
+    *,
+    *::before,
+    *::after {
         box-sizing: border-box;
     }
 
@@ -41,6 +41,10 @@ const GlobalStyle = createGlobalStyle`
         &:hover {
             color: var(--link-hover--color);
         }
+    }
+
+    a.active {
+        color: var(--link-hover--color);
     }
     
     input,

@@ -29,11 +29,12 @@ const CategoriesPage: FC<IProps> = observer((props) => {
       <AddCategoryForm addCategory={addCategory} />
       <SCategories>
         {[...localStore.categories].map((category) => (
-          <CategoryElement
-            key={category.id}
-            category={category}
-            deleteCategory={deleteCategory}
-          />
+          <li key={category.id}>
+            <CategoryElement
+              category={category}
+              deleteCategory={deleteCategory}
+            />
+          </li>
         ))}
       </SCategories>
     </SContainer>

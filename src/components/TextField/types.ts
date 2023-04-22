@@ -8,8 +8,8 @@ export enum InputType {
 
 export interface IProps {
   inputType?: Optional<InputType>;
-  value: string;
-  onChange: (newValue: string, statePath?: Optional<string>) => void;
+  value: string | number;
+  onChange: (newValue: any, statePath?: Optional<string>) => void;
   label?: Optional<string>;
   errorMessage?: Optional<string>;
   statePath?: Optional<string>;

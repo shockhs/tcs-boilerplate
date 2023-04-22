@@ -4,20 +4,36 @@ import { TextField } from "@/components/TextField";
 
 import { SActionForm, SButton } from "./style";
 import { IProps } from "./types";
+import { DataType } from "@/types/hooks/useValidation";
+import { useValidation } from "@/hooks";
 
 const AddCategoryFormImpl: FC<IProps> = (props) => {
   const { addCategory } = props;
 
   const [categoryName, setCategoryName] = useState("");
 
+  const { errorFields, isValid } = useValidation({
+    elements: [
+      {
+        type: DataType.text,
+        statePath: "categoryName",
+        value: categoryName,
+      },
+    ],
+  });
+
   const handleConfirm = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
 
+      if (!isValid()) {
+        return;
+      }
+
       addCategory(categoryName);
       setCategoryName("");
     },
-    [addCategory, categoryName]
+    [addCategory, categoryName, isValid]
   );
 
   return (
@@ -26,6 +42,7 @@ const AddCategoryFormImpl: FC<IProps> = (props) => {
         value={categoryName}
         onChange={setCategoryName}
         label="Название категории"
+        errorMessage={errorFields["categoryName"]}
       />
       <SButton type="submit">Создать</SButton>
     </SActionForm>

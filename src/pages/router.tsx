@@ -14,7 +14,8 @@ import {
 } from "./style";
 import { HeaderComponent } from "@/components/Header";
 import { navigation } from "@/types/providers";
-import CategoriesPage from "./categories/page";
+import { CostsPage } from "./costs";
+import { CategoriesPage } from "./categories";
 import { LocalDatabaseStore } from "@/stores/local-database";
 
 const RouterPage: FC = observer(() => {
@@ -50,6 +51,10 @@ const RouterPage: FC = observer(() => {
               <Route
                 path={navigation.NavigationRoutes.categories}
                 element={<CategoriesPage localStore={localStore} />}
+              />
+              <Route
+                path={navigation.NavigationRoutes.costs}
+                element={<CostsPage localStore={localStore} />}
               />
             </Routes>
           </SInnerContainer>

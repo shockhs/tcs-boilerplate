@@ -13,6 +13,7 @@ export enum DataType {
 
 export type ElementMetadata = {
   minLength?: number;
+  minValue?: number;
 };
 
 export type ElementType = {

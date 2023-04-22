@@ -16,7 +16,7 @@ export const validateField = (
 ): { isCorrect: boolean; errorMessage: Nullable<string> } => {
   const { type, value, metadata } = data;
 
-  const { minLength } = metadata || {};
+  const { minLength, minValue } = metadata || {};
 
   switch (type) {
     case DataType.array: {
@@ -58,9 +58,21 @@ export const validateField = (
     case DataType.number: {
       const isCorrect = guards.isNumber(value);
 
+      if (!isCorrect)
+        return {
+          isCorrect: false,
+          errorMessage: ERROR_MESSAGES.required,
+        };
+
+      const hasMinimalValue = guards.isNumber(minValue)
+        ? value > minValue
+        : true;
+
       return {
-        isCorrect,
-        errorMessage: !isCorrect ? ERROR_MESSAGES.required : null,
+        isCorrect: hasMinimalValue,
+        errorMessage: !hasMinimalValue
+          ? `${ERROR_MESSAGES.minValue} ${minValue}`
+          : null,
       };
     }
     case DataType.object: {

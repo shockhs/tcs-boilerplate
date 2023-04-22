@@ -6,42 +6,66 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { NumberFormatBase } from "react-number-format";
+import { NumericFormat } from "react-number-format";
 
 import { IProps, InputType } from "./types";
-import { STextField, SNoteField, SContainer } from "./style";
+import {
+  STextField,
+  SNoteField,
+  SContainer,
+  SNumericFieldContainer,
+} from "./style";
 import { FieldLabel } from "../FieldLabel";
 import { FieldError } from "../FieldError";
 
 const TextFieldImpl: FC<IProps> = (props) => {
-  const { label, errorMessage, inputType, value, onChange } = props;
+  const { label, statePath, errorMessage, inputType, value, onChange } = props;
 
   const [localValue, setLocalValue] = useState(value);
 
   const onBlur = useCallback(() => {
-    onChange(localValue);
-  }, [localValue, onChange]);
+    onChange(localValue, statePath);
+  }, [localValue, onChange, statePath]);
 
   const onFocus = useCallback(() => {}, []);
 
-  const handleChange = useCallback((ev) => {
-    setLocalValue(ev.target.value);
-  }, []);
+  const handleChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      setLocalValue(ev.target.value);
+    },
+    []
+  );
+
+  const handleChangeNumber = useCallback(
+    ({ floatValue }: { floatValue: number }) => {
+      setLocalValue(floatValue);
+    },
+    []
+  );
 
   const fieldProps = useMemo(() => {
     return {
       value: localValue,
-      onChange: handleChange,
+      onChange: inputType === InputType.number ? undefined : handleChange,
+      onValueChange:
+        inputType === InputType.number ? handleChangeNumber : undefined,
       onBlur,
       onFocus,
     };
-  }, [onBlur, onFocus, handleChange, localValue]);
+  }, [
+    localValue,
+    inputType,
+    handleChangeNumber,
+    handleChange,
+    onBlur,
+    onFocus,
+  ]);
 
   // check after
   const FieldComponent: any = useMemo(() => {
     switch (inputType) {
       case InputType.number: {
-        return NumberFormatBase;
+        return NumericFormat;
       }
       case InputType.text: {
         return STextField;
@@ -57,6 +81,18 @@ const TextFieldImpl: FC<IProps> = (props) => {
   useEffect(() => {
     setLocalValue(value);
   }, [value]);
+
+  if (inputType === InputType.number) {
+    return (
+      <SContainer>
+        {label && <FieldLabel label={label} />}
+        <SNumericFieldContainer>
+          <FieldComponent {...fieldProps} />
+        </SNumericFieldContainer>
+        {errorMessage && <FieldError errorMessage={errorMessage} />}
+      </SContainer>
+    );
+  }
 
   return (
     <SContainer>

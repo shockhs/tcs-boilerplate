@@ -11,7 +11,7 @@ export const SContainer = styled.div`
   }
 `;
 
-export const SCategories = styled.ul`
+export const SCosts = styled.ul`
   display: flex;
   flex-direction: column;
 

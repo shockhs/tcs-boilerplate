@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
 export const SError = styled.span`
-  margin-top: 0.25rem;
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  font-size: 0.75rem;
+  color: var(--color-error);
 `;

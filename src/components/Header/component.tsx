@@ -11,7 +11,7 @@ const HeaderComponentImpl: FC = (props) => {
             Категории
           </SNavLink>
           <SNavLink to={navigation.NavigationRoutes.costs}>Расходы</SNavLink>
-          <SNavLink to={navigation.NavigationRoutes.chart}>Графики</SNavLink>
+          <SNavLink to={navigation.NavigationRoutes.stats}>Статистика</SNavLink>
         </SNavigation>
       </SInnerContainer>
     </SContainer>

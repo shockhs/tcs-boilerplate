@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const SActionForm = styled.form`
   display: flex;
+  width: 100%;
   align-items: flex-end;
-  
-  & > div:nth-child(1) {
-    min-width: 320px;
+
+  & > div:nth-child(2) {
+    width: 320px;
   }
 
   & > * + * {
@@ -15,8 +16,8 @@ export const SActionForm = styled.form`
 
 export const SButton = styled.button`
   padding: 0;
-  border: none;
   margin-bottom: 1.5rem;
+  border: none;
   outline: none;
   border-radius: 4px;
   padding: 0.5rem 1rem;

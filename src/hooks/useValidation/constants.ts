@@ -9,4 +9,5 @@ export const PHONE_NUMBER_LENGTH = 11;
 export const ERROR_MESSAGES = {
   required: "Поле обязательное",
   incorrectFormat: "Некорректный формат",
+  minValue: "Минимальное значение",
 };
