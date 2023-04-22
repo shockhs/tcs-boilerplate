@@ -3,11 +3,21 @@ import { v4 as uuid } from "uuid";
 
 import { ICategoryDto, ICostDto, ICreateCostDto } from "@/types/business";
 import { ILocalDatabaseStore } from "@/types/stores";
+import { Nullable } from "@/types/utils";
 
 export class LocalDatabaseStore implements ILocalDatabaseStore {
   costs: ICostDto[] = [];
   categories: ICategoryDto[] = [];
   lastUpdatedAt: number = Date.now();
+
+  constructor(
+    storedValue: Nullable<{ costs: ICostDto[]; categories: ICategoryDto[] }>
+  ) {
+    if (storedValue) {
+      this.costs = storedValue.costs;
+      this.categories = storedValue.categories;
+    }
+  }
 
   addCategory = (displayName: string) => {
     this.categories.push({

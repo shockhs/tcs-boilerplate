@@ -14,7 +14,7 @@ class StorageService implements IStorageService {
     }
   }
 
-  setItem = (key: string, value: string): void => {
+  setItem = (key: string, value: any): void => {
     if (this.isLocalStorageUsed && guards.isObject(value)) {
       value = JSON.stringify(value);
       this.storage.setItem(`${key}IsObject`, `${true}`);

@@ -6,22 +6,26 @@ import { Modal } from "@/components/Modal";
 import { usePortal } from "@/hooks/usePortal";
 import { TemplateDialogProvider } from "@/providers";
 import { useRootStyles } from "@/hooks/useRootStyles";
+import { HeaderComponent } from "@/components/Header";
+import { navigation } from "@/types/providers";
+import { LocalDatabaseStore } from "@/stores/local-database";
+import { StorageService } from "@/services/storage";
 
 import {
   SOuterContainer,
   SInnerContainer,
   SScrollableContainer,
 } from "./style";
-import { HeaderComponent } from "@/components/Header";
-import { navigation } from "@/types/providers";
 import { CostsPage } from "./costs";
 import { CategoriesPage } from "./categories";
-import { LocalDatabaseStore } from "@/stores/local-database";
 import { StatsPage } from "./stats";
+import { STORE_STORAGE_KEY } from "@/constants/application";
 
 const RouterPage: FC = observer(() => {
   const localStore = useMemo(() => {
-    return new LocalDatabaseStore();
+    const storedValue = StorageService.getItem(STORE_STORAGE_KEY);
+
+    return new LocalDatabaseStore(storedValue);
   }, []);
 
   const { isOpen, closePortal, openPortal, setPortalData, portalData } =
@@ -38,6 +42,16 @@ const RouterPage: FC = observer(() => {
   useEffect(() => {
     setDialogRef();
   }, [setDialogRef]);
+
+  useEffect(() => {
+    return () => {
+      StorageService.setItem(STORE_STORAGE_KEY, {
+        costs: localStore.costs,
+        categories: localStore.categories,
+      });
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useRootStyles();
 
