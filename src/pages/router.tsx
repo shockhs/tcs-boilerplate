@@ -44,14 +44,12 @@ const RouterPage: FC = observer(() => {
   }, [setDialogRef]);
 
   useEffect(() => {
-    return () => {
-      StorageService.setItem(STORE_STORAGE_KEY, {
-        costs: localStore.costs,
-        categories: localStore.categories,
-      });
-    };
+    StorageService.setItem(STORE_STORAGE_KEY, {
+      costs: localStore.costs,
+      categories: localStore.categories,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [localStore.lastUpdatedAt]);
 
   useRootStyles();
 
