@@ -1,0 +1,2 @@
+!function(){var e={};onmessage=function(a){var t,r=a.data,s=r.name,n=r.fakeId;switch(r.hasOwnProperty("time")&&(t=r.time),s){case"setInterval":e[n]=setInterval((function(){postMessage({fakeId:n})}),t);break;case"clearInterval":e.hasOwnProperty(n)&&(clearInterval(e[n]),delete e[n]);break;case"setTimeout":e[n]=setTimeout((function(){postMessage({fakeId:n}),e.hasOwnProperty(n)&&delete e[n]}),t);break;case"clearTimeout":e.hasOwnProperty(n)&&(clearTimeout(e[n]),delete e[n])}}}();
+//# sourceMappingURL=582.bb7da380.chunk.js.map

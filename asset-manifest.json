@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.95aa2ec4.css",
+    "main.js": "/static/js/main.db60f0af.js",
+    "awesome-phonenumber.js": "/static/js/awesome-phonenumber.52e39836.chunk.js",
+    "static/js/582.bb7da380.chunk.js": "/static/js/582.bb7da380.chunk.js",
+    "index.html": "/index.html",
+    "main.95aa2ec4.css.map": "/static/css/main.95aa2ec4.css.map",
+    "main.db60f0af.js.map": "/static/js/main.db60f0af.js.map",
+    "awesome-phonenumber.52e39836.chunk.js.map": "/static/js/awesome-phonenumber.52e39836.chunk.js.map",
+    "582.bb7da380.chunk.js.map": "/static/js/582.bb7da380.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.95aa2ec4.css",
+    "static/js/main.db60f0af.js"
+  ]
+}
