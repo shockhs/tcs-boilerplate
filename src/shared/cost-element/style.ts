@@ -4,8 +4,9 @@ export const SCostElement = styled.tr`
   display: grid;
   border-bottom: 1px solid var(--color-secondary);
   width: 100%;
-  grid-template-columns: repeat(3, 200px) min-content;
+  grid-template-columns: repeat(4, 200px) min-content;
   align-items: center;
+  height: 2rem;
 
   & td {
     display: flex;

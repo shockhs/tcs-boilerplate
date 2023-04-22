@@ -99,5 +99,8 @@ class StorageService implements IStorageService {
   };
 }
 
-export default new StorageService();
+const TemplateStorageServiceInstance = new StorageService();
+
+export default TemplateStorageServiceInstance;
+
 export { StorageService };

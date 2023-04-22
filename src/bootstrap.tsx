@@ -11,6 +11,8 @@ import { Modal } from "@/components/Modal";
 import { GlobalStyle } from "./styles/globaStyle";
 
 import "@/utils/hack-timer";
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 export const Bootstrap = () => {
   const { isOpen, closePortal, openPortal, setPortalData, portalData } =

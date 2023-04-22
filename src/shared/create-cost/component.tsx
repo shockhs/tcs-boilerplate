@@ -10,9 +10,6 @@ import cloneDeep from "lodash/cloneDeep";
 import set from "lodash/set";
 
 import { TextField } from "@/components/TextField";
-
-import { SActionForm, SButton } from "./style";
-import { IProps } from "./types";
 import { InputType } from "@/components/TextField/types";
 import { Dropdown } from "@/components/Dropdown";
 import { DropdownOption } from "@/components/Dropdown/types";
@@ -20,6 +17,9 @@ import { Nullable } from "@/types/utils";
 import { useValidation } from "@/hooks";
 import { DataType } from "@/types/hooks/useValidation";
 import { ICreateCostDto } from "@/types/business";
+
+import { SActionForm, SButton } from "./style";
+import { IProps } from "./types";
 import { DEFAULT_DATA } from "./constants";
 
 const CreateCostFormImpl: FC<IProps> = (props) => {
@@ -56,6 +56,11 @@ const CreateCostFormImpl: FC<IProps> = (props) => {
       displayName: category.displayName,
     }));
   }, [categories]);
+
+  
+  const searchRequest = useCallback(async () => {
+    return categoriesBuiltOptions;
+  }, [categoriesBuiltOptions]);
 
   const handleChange = useCallback(
     (newValue: string | number, statePath?: string) => {
@@ -96,9 +101,6 @@ const CreateCostFormImpl: FC<IProps> = (props) => {
     [createCost, dto, isValid]
   );
 
-  const searchRequest = useCallback(async () => {
-    return categoriesBuiltOptions;
-  }, [categoriesBuiltOptions]);
 
   return (
     <SActionForm onSubmit={handleConfirm}>

@@ -14,13 +14,9 @@ export const SContainer = styled.div`
 export const SCategories = styled.table`
   display: flex;
   flex-direction: column;
-
-  & > * + * {
-    margin-top: 0.5rem;
-  }
 `;
 
-export const SHeader = styled.thead`
+export const SHeader = styled.tr`
   display: grid;
   align-items: center;
   text-align: left;

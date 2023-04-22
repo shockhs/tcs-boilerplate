@@ -17,6 +17,7 @@ import { navigation } from "@/types/providers";
 import { CostsPage } from "./costs";
 import { CategoriesPage } from "./categories";
 import { LocalDatabaseStore } from "@/stores/local-database";
+import { StatsPage } from "./stats";
 
 const RouterPage: FC = observer(() => {
   const localStore = useMemo(() => {
@@ -42,7 +43,9 @@ const RouterPage: FC = observer(() => {
 
   return (
     <>
-      {isOpen && <Modal>{portalData}</Modal>}
+      {isOpen && (
+        <Modal>{portalData.content ? portalData.content : portalData}</Modal>
+      )}
       <SOuterContainer>
         <HeaderComponent />
         <SScrollableContainer>
@@ -55,6 +58,10 @@ const RouterPage: FC = observer(() => {
               <Route
                 path={navigation.NavigationRoutes.costs}
                 element={<CostsPage localStore={localStore} />}
+              />
+              <Route
+                path={navigation.NavigationRoutes.stats}
+                element={<StatsPage localStore={localStore} />}
               />
             </Routes>
           </SInnerContainer>

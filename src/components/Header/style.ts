@@ -6,7 +6,7 @@ export const SContainer = styled.header`
   height: 100%;
   display: flex;
   align-items: center;
-  box-shadow: 0 4px 56px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 56px var(--color-shadow);
 `;
 
 export const SInnerContainer = styled.div`

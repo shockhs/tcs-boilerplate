@@ -31,28 +31,35 @@ const CostsPage: FC<IProps> = observer((props) => {
     <SContainer>
       <CreateCostForm createCost={createCost} categories={categories} />
       <SCosts>
-        <SHeader>
-          <th>
-            <STableTitle>Отображаемое имя</STableTitle>
-          </th>
-          <th>
-            <STableTitle>Категория</STableTitle>
-          </th>
-          <th>
-            <STableTitle>Расход</STableTitle>
-          </th>
-          <th>
-            <STableTitle>Действия</STableTitle>
-          </th>
-        </SHeader>
-        {[...localStore.costs].map((cost) => (
-          <CostElement
-            key={cost.id}
-            cost={cost}
-            categories={categories}
-            deleteCost={deleteCost}
-          />
-        ))}
+        <thead>
+          <SHeader>
+            <th>
+              <STableTitle>Отображаемое имя</STableTitle>
+            </th>
+            <th>
+              <STableTitle>Категория</STableTitle>
+            </th>
+            <th>
+              <STableTitle>Сумма</STableTitle>
+            </th>
+            <th>
+              <STableTitle>Дата создания</STableTitle>
+            </th>
+            <th>
+              <STableTitle>Действия</STableTitle>
+            </th>
+          </SHeader>
+        </thead>
+        <tbody>
+          {[...localStore.costs].map((cost) => (
+            <CostElement
+              key={cost.id}
+              cost={cost}
+              categories={categories}
+              deleteCost={deleteCost}
+            />
+          ))}
+        </tbody>
       </SCosts>
     </SContainer>
   );

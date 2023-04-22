@@ -28,21 +28,25 @@ const CategoriesPage: FC<IProps> = observer((props) => {
     <SContainer>
       <AddCategoryForm addCategory={addCategory} />
       <SCategories>
-        <SHeader>
-          <th>
-            <STableTitle>Отображаемое имя</STableTitle>
-          </th>
-          <th>
-            <STableTitle>Действия</STableTitle>
-          </th>
-        </SHeader>
-        {[...localStore.categories].map((category) => (
-          <CategoryElement
-            key={category.id}
-            category={category}
-            deleteCategory={deleteCategory}
-          />
-        ))}
+        <thead>
+          <SHeader>
+            <th>
+              <STableTitle>Отображаемое имя</STableTitle>
+            </th>
+            <th>
+              <STableTitle>Действия</STableTitle>
+            </th>
+          </SHeader>
+        </thead>
+        <tbody>
+          {[...localStore.categories].map((category) => (
+            <CategoryElement
+              key={category.id}
+              category={category}
+              deleteCategory={deleteCategory}
+            />
+          ))}
+        </tbody>
       </SCategories>
     </SContainer>
   );

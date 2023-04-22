@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
         --color-black: #000000;
         --color-error: #f52222;
         --color-error-button: #a00707;
+        --color-shadow: rgba(0, 0, 0, 0.12);
     }
     
     html,
@@ -31,6 +32,14 @@ const GlobalStyle = createGlobalStyle`
     *::before,
     *::after {
         box-sizing: border-box;
+    }
+
+    .root-modal {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     a {

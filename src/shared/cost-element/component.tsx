@@ -3,22 +3,24 @@ import React, { FC, memo, useCallback } from "react";
 import { ICategoryDto, ICostDto } from "@/types/business";
 import { beautify } from "@/utils";
 import { CURRENCY } from "@/constants/currency";
+import { Optional } from "@/types/utils";
+import { DayJsService } from "@/services/dayjs";
 
 import { SCostElement, SButton, STitle } from "./style";
 
 interface IProps {
   cost: ICostDto;
   categories: ICategoryDto[];
-  deleteCost: (id: string) => void;
+  deleteCost?: Optional<(id: string) => void>;
 }
 
 const CostElementImpl: FC<IProps> = (props) => {
   const { cost, deleteCost, categories } = props;
 
-  const { id, displayName, costValue, categoryId } = cost;
+  const { id, displayName, costValue, categoryId, createdAt } = cost;
 
   const onDeleteClick = useCallback(() => {
-    deleteCost(id);
+    deleteCost?.(id);
   }, [id, deleteCost]);
 
   return (
@@ -36,8 +38,15 @@ const CostElementImpl: FC<IProps> = (props) => {
         <STitle>{`${beautify.money(costValue)} ${CURRENCY.ruble}`}</STitle>
       </td>
       <td>
-        <SButton onClick={onDeleteClick}>Удалить</SButton>
+        <STitle>
+          {DayJsService.instance(createdAt).format("DD.MM.YYYY HH:mm")}
+        </STitle>
       </td>
+      {deleteCost && (
+        <td>
+          <SButton onClick={onDeleteClick}>Удалить</SButton>
+        </td>
+      )}
     </SCostElement>
   );
 };

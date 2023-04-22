@@ -128,7 +128,7 @@ const DropdownDefault: FC<Props> = (props) => {
         onChange={onChangeSelect}
         components={customOptions ? customOptions : undefined}
         isLoading={isLoading}
-        placeholder={placeholder}
+        placeholder={placeholder || "Не выбрано"}
         noOptionsMessage={() => `Ничего не найдено`}
         getOptionValue={propsGetOptionValue || getOptionValue}
         getOptionLabel={propsGetOptionLabel || getOptionLabel}
