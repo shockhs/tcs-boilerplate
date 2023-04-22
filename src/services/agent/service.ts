@@ -1,11 +1,11 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { isEqual } from 'lodash';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
+import { isEqual } from "lodash";
 
-import { API_ROOT } from '@/constants/api';
-import { agent } from '@/types/services';
-import { guards } from '@/types/guards';
-import { CommonAdapter, IAdapter, AdapterType } from '@/adapters';
-import { AnyFunction } from '@/types/utils';
+import { API_ROOT } from "@/constants/api";
+import { agent } from "@/types/services";
+import { guards } from "@/types/guards";
+import { CommonAdapter, IAdapter, AdapterType } from "@/adapters";
+import { AnyFunction } from "@/types/utils";
 
 class AgentService implements agent.IAgentService {
   private templateModalProps: agent.ModalProps | null = null;
@@ -51,7 +51,7 @@ class AgentService implements agent.IAgentService {
 
   handleError(error: AxiosError) {
     let errorMessage =
-      error.response?.data?.message || error.message || 'Ошибка';
+      error.response?.data?.message || error.message || "Ошибка";
 
     if (guards.isString(error.response?.data)) {
       errorMessage = error.response?.data;
@@ -85,7 +85,7 @@ class AgentService implements agent.IAgentService {
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
       return Promise.all([this.agentInitializationPromise]).then(() => {
-        if (!this.axiosInstance) return;
+        if (guards.isNull(this.axiosInstance)) return;
 
         const controller = new AbortController();
 
@@ -110,7 +110,7 @@ class AgentService implements agent.IAgentService {
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
       return Promise.all([this.agentInitializationPromise]).then(() => {
-        if (!this.axiosInstance) return;
+        if (guards.isNull(this.axiosInstance)) return;
 
         const controller = new AbortController();
 
@@ -136,7 +136,7 @@ class AgentService implements agent.IAgentService {
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
       return Promise.all([this.agentInitializationPromise]).then(() => {
-        if (!this.axiosInstance) return;
+        if (guards.isNull(this.axiosInstance)) return;
 
         const controller = new AbortController();
 
@@ -161,7 +161,7 @@ class AgentService implements agent.IAgentService {
       options: AxiosRequestConfig<any> | undefined = {}
     ): Promise<any> => {
       return Promise.all([this.agentInitializationPromise]).then(() => {
-        if (!this.axiosInstance) return;
+        if (guards.isNull(this.axiosInstance)) return;
 
         const controller = new AbortController();
 
@@ -187,7 +187,7 @@ class AgentService implements agent.IAgentService {
   //     request: async (
   //       params: agent.AppCheckAccessParams
   //     ): Promise<agent.AppCheckAccessPromise> => {
-  //       if (!this.axiosInstance)
+  //       if (guards.isNull(this.axiosInstance))
   //         return { success: false, error: "Агент не был инициализирован" };
 
   //       try {
