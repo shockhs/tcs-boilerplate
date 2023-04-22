@@ -44,11 +44,17 @@ const TextFieldImpl: FC<IProps> = (props) => {
   );
 
   const fieldProps = useMemo(() => {
+    if (inputType === InputType.number)
+      return {
+        value: localValue,
+        onValueChange: handleChangeNumber,
+        onBlur,
+        onFocus,
+      };
+
     return {
       value: localValue,
-      onChange: inputType === InputType.number ? undefined : handleChange,
-      onValueChange:
-        inputType === InputType.number ? handleChangeNumber : undefined,
+      onChange: handleChange,
       onBlur,
       onFocus,
     };
