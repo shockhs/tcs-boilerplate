@@ -56,7 +56,7 @@ const CreateCostFormImpl: FC<IProps> = (props) => {
   const categoriesBuiltOptions: DropdownOption[] = useMemo(() => {
     return categories.map((category) => ({
       id: category.id,
-      displayName: category.name,
+      displayName: category.displayName,
     }));
   }, [categories]);
 

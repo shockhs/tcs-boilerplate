@@ -11,8 +11,8 @@ const CategoriesPage: FC<IProps> = observer((props) => {
   const { localStore } = props;
 
   const addCategory = useCallback(
-    (name: string) => {
-      localStore.addCategory(name);
+    (displayName: string) => {
+      localStore.addCategory(displayName);
     },
     [localStore]
   );

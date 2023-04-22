@@ -3,17 +3,17 @@ import { v4 as uuid } from "uuid";
 
 import { ICategoryDto, ICostDto, ICreateCostDto } from "@/types/business";
 import { ILocalDatabaseStore } from "@/types/stores";
-import { CATEGORIES_MOCK } from "./mocks";
+import { CATEGORIES_MOCK, COSTS_MOCK } from "./mocks";
 
 export class LocalDatabaseStore implements ILocalDatabaseStore {
-  costs: ICostDto[] = [];
+  costs: ICostDto[] = COSTS_MOCK;
   categories: ICategoryDto[] = CATEGORIES_MOCK;
   lastUpdatedAt: number = Date.now();
 
-  addCategory = (name: string) => {
+  addCategory = (displayName: string) => {
     this.categories.push({
       id: uuid(),
-      name,
+      displayName,
     });
     this.lastUpdatedAt = Date.now();
   };

@@ -11,7 +11,7 @@ interface IProps {
 const CategoryElementImpl: FC<IProps> = (props) => {
   const { category, deleteCategory } = props;
 
-  const { id, name } = category;
+  const { id, displayName } = category;
 
   const onDeleteClick = useCallback(() => {
     deleteCategory(id);
@@ -19,7 +19,7 @@ const CategoryElementImpl: FC<IProps> = (props) => {
 
   return (
     <SCategoryElement>
-      <STitle>{name}</STitle>
+      <STitle>{displayName}</STitle>
       <SButton onClick={onDeleteClick}>Удалить</SButton>
     </SCategoryElement>
   );

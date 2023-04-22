@@ -1,3 +1,3 @@
 export interface IProps {
-  addCategory: (name: string) => void;
+  addCategory: (displayName: string) => void;
 }
